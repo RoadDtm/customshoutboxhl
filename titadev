@@ -1,0 +1,268 @@
+// CustomChat v2 par Tita!
+// Il y a un copyright sur ce script. Ne le changez pas, merci.
+var scc = {
+	couleur: "# C2EAFF",
+	notif: vrai,
+	bot: faux,
+	lastRP: Date.now (),
+	lastH: 0
+};
+var rP = {
+	rep1: {titre: "", msg: ""},
+	rep2: {titre: "", msg: ""},
+	rep3: {titre: "", msg: ""},
+	rep4: {titre: "", msg: ""},
+	rep5: {titre: "", msg: ""}
+};
+var customChat = {
+	msgID: [],
+	__msgID: [],
+	nom d'utilisateur: $ ('. accountUsername'). text (),
+	template_Button: '<div id = "customChat_op" style = "font-style: none; float: right; cursor: pointer;" class = "fa fa-bars"> </div> ',
+	template_Html: '<div id = "customChat_op" data-role = "blk" style = "width: 100%; height: 100%; position: fixed; z-index: 2147483645; background-color: rgba (0,0, 0,0.2); opacity: 0; display: none; "> </div> <div style =" right: -800px; position: fixed; " class = "customChat"> <div class = "customChat_header" style = "background-color: # 2F78A0"> <div class = "customChat_close" style = "background-image: url ()"> </div> <div class = "customChat_header_text" style = "margin-top: 40px;"> CustomChat </div> <div class = "customChat_header_message"> par Wayz </div> </div> <div class = "customChat_middle_wrapper"> <div class = "customChat_middle"> <div> <input class = "
+	template_Css: "<style id = \" css_cc \ ">. customChat {position: fixed; width: 300px; height: 100%; right: -420px; top: 0; color: # 000; z-index: 2147483647; font -family: myriad-pro, sans-serif; text-align: left; line-height: 1.2; user-select: none! important; -khtml-user-select: none! important; -o-user-select: none ! important; -moz-user-select: -moz-none! important; -webkit-user-select: aucun! important; -webkit-transition: tous les .35s linéaires; -moz-transition: tous les .35s linéaires; -o -transition: toutes les .35s linéaires; transition: toutes les .35s linéaires} .customChat .customChat_header {position: absolue; hauteur: 230px; largeur: 240px; remplissage: 0 30px; haut: 0; gauche: 0; débordement: masqué; bordure -gauche: 1px solide rgba (0,0,0, .2); taille de la boîte: boîte de contenu} .customChat .customChat_header .customChat_header_text {largeur: 100%; hauteur: 35px; padding-top: 15px; text-align : center; color: #fff; font-family: \ "Source Sans Pro \",sans-serif; font-size: 25px; font-weight: plus léger} .customChat .customChat_header .customChat_header_message {text-align: center; color: #fff; font-family: \ "Source Sans Pro \", sans-serif; font-size: 13px; font-weight: plus léger} .customChat .customChat_middle_wrapper {height: auto; top: 230px; bottom: 0; width: 100%; position: absolue; z-index: -2; border-left: 1px rgba solide (0,0,0, .2); couleur d'arrière-plan: rgb (245,245,245)}. customChat> .customChat_middle_wrapper> .customChat_middle {couleur d'arrière-plan: #fff; position: absolue; haut: 0; gauche: 0; width: 100%; padding: 10%; border-bottom: 1px solid #dfdfdf; box-sizing: border-box; overflow: auto; max-height: 100%}. customChat_pred {list-style: none; padding: 4px ; margin: 0; background: #FEFEFE} .customChat_a a {display: block; margin: 1px 0; padding: 8px 20px; color: # 34495E; background: #FFF; text-decoration: none; -webkit-transition: all .3s; -moz-transition: tous.3s; transition: all .3s} .customChat_a a: focus, .customChat_a a: hover {background: # 2F78A0; color: #FFF; padding-left: 25px} .customChat_reponse {position: fixed; width: 600px; height: 100 %; right: 0px; top: 0; color: # 000; z-index: 2147483646; font-family: myriad-pro, sans-serif; text-align: left; line-height: 1.2; user-select: none ! important; -khtml-user-select: none! important; -o-user-select: none! important; -moz-user-select: -moz-none! important; -webkit-user-select: none! important; -webkit-transition: tous les .35s linéaires; -moz-transition: tous les .35s linéaires; -o-transition: tous les .35s linéaires; transition: tous les .35s linéaires; margin-top: 229px;}. customChat_rep_wrapper {background-color : #fff; position: absolue; haut: 0; gauche: 0; largeur: 100%; bordure: 1px solide #dfdfdf; dimensionnement de la boîte: bordure-boîte; débordement: auto; hauteur max: 50%; largeur max : 100%}. CustomChat_cb [type = checkbox]: coché, .customChat_cb [type = checkbox]: non (: coché) {position:absolu; gauche: -9999px} .customChat_cb [type = case à cocher]: coché + libellé, .customChat_cb [type = case à cocher]: non (: coché) + libellé {position: relative; remplissage-gauche: 75px; curseur: pointeur}. customChat_cb [type = case à cocher]: coché + libellé: après, .customChat_cb [type = case à cocher]: coché + libellé: avant, .customChat_cb [type = case à cocher]: non (: coché) + libellé: après, .customChat_cb [type = case à cocher]: non (: coché) + libellé: avant {contenu: ''; position: absolue} .customChat_cb [type = case à cocher]: coché + libellé: avant, .customChat_cb [type = case à cocher]: non (: coché) + label: before {left: 0; top: -3px; width: 65px; height: 30px; background: #DDD; border-radius: 15px; -webkit-transition: background-color .2s; -moz-transition: background- couleur .2s; -ms-transition: background-color .2s; transition: background-color .2s} .customChat_cb [type = case à cocher]: coché + libellé: après, .customChat_cb [type = case à cocher]: non (: coché) + étiquette: après {largeur:20px; hauteur: 20px; -webkit-transition: tous les .2s; -moz-transition: tous les .2s; -ms-transition: tous les .2s; transition: tous les .2s; border-radius: 50%; arrière-plan: # 7F8C9A ; top: 2px; left: 5px} .customChat_cb [type = checkbox]: coché + libellé: avant {background: # 34495E} .customChat_cb [type = checkbox]: coché + libellé: après {background: # 6AD2EF; haut: 2px ; gauche: 40px} .customChat_cb [type = checkbox]: coché + libellé .ui, .customChat_cb [type = checkbox]: coché + libellé .ui: après, .customChat_cb [type = checkbox]: non (: coché) + libellé .ui: avant {position: absolue; gauche: 6px; largeur: 65px; rayon de la bordure: 15px; taille de la police: 14px; poids de la police: 700; hauteur de la ligne: 22px; -webkit-transition: tous .2s; -moz-transition: tous les .2s; -ms-transition: tous les .2s; transition: tous les .2s} .customChat_cb [type = case à cocher]: non (: coché) + étiquette .ui: avant {contenu: 'Non'; gauche: 32px} .customChat_cb [type = case à cocher]: coché + étiquette .ui: après {contenu: 'Oui'; couleur:# 6AD2EF} .customChat_btn [type = button] {background-color: # 6AD2EF; border-radius: 15px; border: 5px solid # 34495E; width: 65px; height: 30px; curseur: pointeur; marge droite: 5px; - webkit-transition: all .3s; -moz-transition: all .3s; -ms-transition: all .3s; transition: all .3s} label {color: # 34495E} .customChat_btn [type = button]: hover {background -couleur: # 4DAEC9} </style> ", // case à cocher de base par @KarimTita
+	template_Js: '<script id = "js_cc"> $ ("# rep_pred"). click (function () {var s = $ (". customChat_reponse"); s.hasClass ("visible")? ($ (this) .css ("backgroundColor", "# 6AD2EF"), s.animate ({right: "- 1000px"}, 200) .removeClass ("visible")) :( s.animate ({right: "0px"}, 200) .addClass ("visible"), $ (this) .css ("backgroundColor", "# 4993BC"))}), $ ("div # customChat_op"). Click (function () {var s = $ ( ".customChat"), a = $ (". customChat_reponse"), z = $ ("# modal_js"); s.hasClass ("visible")? (s.animate ({right: "- 1000px"}, 200 ) .removeClass ("visible"), a.animate ({right: "- 1000px"}, 200) .removeClass ("visible"), z.css ("display", "none"), $ ("# rep_pred ") .css ("backgroundColor "," # 6AD2EF "), $ (\ 'div # customChat_op [data-role =" blk "] \'). animate ({opacity:" 0 "}, 200," swing ", function () {$ (\ 'div # customChat_op [data-role = "blk"] \'). css ("display", "none")})) :( s.animate ({right: "0px"}, 200) .addClass ("visible"), $ (\ 'div # customChat_op [data-role = "blk"] \'). animate ({opacity: "1"}, 200, "swing", function () {$ (\ ' div # customChat_op [data-role = "blk"] \ '). css ("display", "block")}))}); </script>',none ")})) :( s.animate ({right:" 0px "}, 200) .addClass (" visible "), $ (\ 'div # customChat_op [data-role =" blk "] \'). animate ({opacity: "1"}, 200, "swing", function () {$ (\ 'div # customChat_op [data-role = "blk"] \'). css ("display", "block") }))}); </script> ',none ")})) :( s.animate ({right:" 0px "}, 200) .addClass (" visible "), $ (\ 'div # customChat_op [data-role =" blk "] \'). animate ({opacity: "1"}, 200, "swing", function () {$ (\ 'div # customChat_op [data-role = "blk"] \'). css ("display", "block") }))}); </script> ',
+	template_M: '<div id = "modal_js" style = "display: none; width: 600px; background-color: #fefefe; border: 1px solid rgba (0, 0, 0, 0.2); border-radius: 5px; - webkit-box-shadow: 0px 0px 15px rgba (0,0,0,0.3); - moz-box-shadow: 0px 0px 15px rgba (0,0,0,0.3); box-shadow: 0px 0px 15px rgba ( 0,0,0,0.3); z-index: 9854136598742 "> <div id =" modal_js_head "style =" border-bottom: 1px solid rgba (0, 0, 0, 0.2); rembourrage: 10px 15px 10px 15px; "> </div> <div id =" modal_js_body "style =" padding: 15px; "> </div> <div id =" modal_js_footer "style =" border-top: 1px solide rgba (0, 0, 0, 0.2); rembourrage: 10px 15px 25px 15px; text-align: right; "> <input type =" button "id =" modal_js_cancel "class =" button primary "value =" Annuler "/> <input type ="button "id =" modal_js_save "class =" button "value =" Sauvegarder "/> </div> </div> ',
+	init: function () {
+		if (location.host == "dreamgaming.fr") {
+			alerte («PLA-PLA-PLAGIEUR»);
+			return location.href = "https://forum.homelife-roleplay.fr/";
+		}
+		setInterval (function () {customChat.checkNewMsg ();}, 250);
+		if (location.pathname.indexOf ('chatbox')! = -1) {
+			$ ('# taigachat_controls'). append (this.template_Button);
+			$ ('# customChat_op.fa.fa-bars'). attr ('style', 'font-style: aucun; float: droite; curseur: pointeur; font-size: 24px; padding-right: 10px;');
+		}
+		autre {
+			$ ('# taigachat_full'). find ('. nodeTitle'). append (this.template_Button);
+		}
+		$ ('body'). prepend (this.template_Html);
+		$ ('body'). prepend (this.template_Css);
+		$ ('body'). prepend (this.template_Js);
+		$ ('body'). prepend (this.template_M);
+		var $ notif = $ ('# notif [type = case à cocher]');
+		$ notif.on ('changer', function () {
+			scc.notif = $ (ceci) .is (': vérifié');
+			customChat.save ();
+		});
+		var $ bot = $ ('# bot [type = case à cocher]');
+		$ bot.on ('changer', fonction () {
+			scc.bot = $ (this) .is (': vérifié');
+			customChat.save ();
+		});
+		var $ bonjour = $ ('# bonjour [type = bouton]');
+		$ hello.on ('clic', fonction () {
+			customChat.hello ();
+			customChat.save ();
+		});
+		var $ rep = $ ('a # customChat_rP');
+		$ rep.on ('clic', fonction () {
+			if ($ (this) .data ('msg'). length> 4) {
+				scc.lastRP = Date.now ();
+				var $ input = $ ('# taigachat_message');
+				$ input.val (($ input.val (). trim (). length> 1? $ input.val (). trim () + "": "") + customChat.decode_b64 ($ (this) .data ( 'msg')));
+				customChat.save ();
+			}
+			autre {
+				customChat.add_rP ($ (this));
+			}
+		});
+		var $ rep_del = $ ('a # customChat_del-rP');
+		$ rep_del.on ('clic', fonction () {
+			customChat.del_rP ();
+		});
+		
+		(fonction ($) {
+			$ .fn.extend ({
+				centre: function () {
+					retourne this.each (function () {
+						var top = ($ (window) .height () - $ (this) .outerHeight ()) / 2;
+						var gauche = ($ (fenêtre) .width () - $ (this) .outerWidth ()) / 2;
+						$ (this) .css ({position: 'absolu', marge: 0, haut: (haut> 0? haut: 0) + 'px', gauche: (gauche> 0? gauche: 0) + 'px'} );
+					});
+				}
+			}); 
+		}) (jQuery);
+		this.load ();
+	},
+	encode_b64: function (str) {
+		return window.btoa (encodeURIComponent (escape (str)));
+	},
+	decode_b64: function (str) {
+		return unescape (decodeURIComponent (window.atob (str)));
+	},
+	enregistrer: function () {
+		var settings_scc = JSON.stringify (scc);
+		var settings_rP = JSON.stringify (rP);
+		localStorage.setItem ('settings_scc', settings_scc);
+		localStorage.setItem ('settings_rP', settings_rP);
+	},
+	load: function () {
+		var a = localStorage.getItem ("settings_scc");
+		si un){
+			var b = Object.keys (scc);
+			var c = JSON.parse (a);
+			for (var i in b) {
+				if (c [b [i]] == indéfini) {
+					this.save ();
+				}
+				autre {
+					scc [b [i]] = c [b [i]];
+				}
+			}
+		}
+		autre {
+			this.save ();
+		}
+		var z = localStorage.getItem ("settings_rP");
+		if (z) {
+			var b = Object.keys (rP);
+			var c = JSON.parse (z);
+			for (var i in b) {
+				if (c [b [i]] == indéfini) {
+					this.save ();
+				}
+				autre {
+					rP [b [i]] = c [b [i]];
+				}
+			}
+		}
+		autre {
+			this.save ();
+		}
+		pour (var i dans rP) {
+			if (rP [i] .title.length> 1 && rP [i] .msg.length> 1) {
+				var num = i.substr (3);
+				$ ('# customChat_rP [data-num = "' + num + '"]'). text (customChat.decode_b64 (rP [i] .title));
+				$ ('# customChat_rP [data-num = "' + num + '"]'). data ('msg', rP [i] .msg);
+			}
+		}
+		$ ('# notif [type = case à cocher]'). prop ('vérifié', scc.notif);
+		$ ('# bot [type = checkbox]'). prop ('vérifié', scc.bot);
+		setInterval (function () {customChat.lastRP ();}, 2000);
+	},
+	notifier: fonction (msg) {
+		if (scc.notif) {
+			if (! ("Notification" dans la fenêtre)) {console.error ("Ce navigateur ne supporte pas les notifications!")} else if (Notification.permission === "accordé") {var notification = new Notification (msg, {icon: 'http://realitygaming.fr/attachments/rg-png.14121/'})}else if (Notification.permission! == "refusé") {Notification.requestPermission (function (e) {if (! ("permission" dans Notification)) {Notification.permission = e} if (e === "accordé") {var t = new Notification (msg, {icon: 'https://forum.homelife-roleplay.fr/styles/xenfocus/images/custom/homelife-logo.png/ '})}})}
+		}
+		autre {
+			console.log ('notif désactiver')
+		}
+	},
+	checkNewMsg: function () {
+		var msg = $ ('# taigachat_box'). children ('ol'). children ('li');
+		for (var i dans msg) {
+			var id = msg.eq (i) .data ('messageid');
+			var msg_text = $ ('# taigachat_box'). children ('ol'). children ('li [data-messageid = "' + id + '"]'). children ('span'). eq (1). enfants ('div'). text (). trim ();
+			var msg_sender = $ ('# taigachat_box'). children ('ol'). children ('li [data-messageid = "' + id + '"]'). children ('span'). eq (1). enfants ('a'). text (). trim ();
+			if (this.msgID.indexOf (id) == -1 && msg_text.indexOf (this.username)! = -1) {
+				this.msgID.unshift (id);
+				this.newMsg (id);
+			}
+			else if (this .__ msgID.indexOf (id) == -1 && msg_sender == this.username && scc.bot) {
+				$ ('# taigachat_box'). children ('ol'). children ('li [data-messageid = "' + id + '"]'). children ('span'). eq (1) .children (' a '). children (' span '). attr (' class ',' style10 ');
+				this .__ msgID.unshift (id);
+			}
+		}
+	},
+	newMsg: function (id) {
+		$ ('# taigachat_box'). children ('ol'). children ('li [data-messageid = "' + id + '"]'). css ('backgroundColor', scc.color);
+		var msg = $ ('# taigachat_box'). children ('ol'). children ('li [data-messageid = "' + id + '"]'). children ('span'). eq (1). enfants ('div'). text (). trim ();
+		var sender = $ ('# taigachat_box'). children ('ol'). children ('li [data-messageid = "' + id + '"]'). children ('span'). eq (1). enfants ('a'). text (). trim ();
+		this.notify (expéditeur + "-" + msg);
+	},
+	bonjour: function () {
+		si ((Date.now () - scc.lastH)> = 3600000) {
+			scc.lastH = Date.now ();
+			var user1 = $ ('# taigachat_box'). children ('ol'). children ('li'). eq (5) .children ('span'). eq (1) .children ('a'). text ();
+			var user2 = $ ('# taigachat_box'). children ('ol'). children ('li'). eq (17) .children ('span'). eq (1) .children ('a'). text ();
+			var user3 = $ ('# taigachat_box'). children ('ol'). children ('li'). eq (23) .children ('span'). eq (1) .children ('a'). text ();
+			var userinchat = $ ('# taigachat_count'). text ();
+			$ ("# taigachat_message"). val ("Salut à @" + user1 + ", @" + user2 + ", @" + user3 + "et aux" + userinchat + "membres actuellement sur le chat :)");
+			this.save ();
+		}
+		autre{
+			alert ('Vous avez utilisé cette fonction il y a moins d'une heure!');
+		}
+	},
+	lastRP: function () {
+		var ms = Date.now () - scc.lastRP,
+		// http://stackoverflow.com/a/19700358
+		secondes = parseInt ((ms / 1000)% 60),
+		minutes = parseInt ((ms / (1000 * 60))% 60),
+		heures = parseInt ((ms / (1000 * 60 * 60))% 24);
+
+		heures = (heures <10)? "0" + heures: heures;
+		minutes = (minutes <10)? "0" + minutes: minutes;
+		secondes = (secondes <10)? "0" + secondes: secondes;
+
+		var time = heures + ":" + minutes + ":" + secondes;
+		$ ('# customChat_timer-rP'). text ('Dernier message envoyé il y a' + heure);
+	},
+	modal: function (titre, corps) {
+		$ ('# modal_js'). css ('afficher', 'bloquer');
+		$ ('# modal_js'). center ();
+		$ ('# modal_js_head'). html ('<h2 style = "font-family: \' Open Sans Condensed \ ', \' Arial \ ', sans-serif; font-size: 12pt; color: rgb (52, 73, 94); "> '+ titre +' </h2> ');
+		$ ('# modal_js_body'). html (corps);
+	},
+	add_rP: fonction ($ rep) {
+		this.modal ('Ajouter une réponse', '<input id = "modal_js_rep_title" class = "textCtrl" style = "width: 100%; height: 20px;" placeholder = "Entrez le titre du message" /> <br / > <br/> <input id = "modal_js_rep_body" class = "textCtrl" style = "width: 100%; height: 20px;" placeholder = "Entrez le contenu du message" /> ');
+		var is_add = vrai;
+		$ ('# modal_js_save'). on ('click', function () {
+			if (is_add) {
+				var rep_msg = $ ('# modal_js_rep_body'). val (). trim ();
+				var rep_title = $ ('# modal_js_rep_title'). val (). trim ();
+				if (rep_title.length> 2) {
+					if (rep_msg.length> 4) {
+						var cR = $ rep.data ('num');
+						rP ['rep' + cR] .title = customChat.encode_b64 (rep_title);
+						rP ['rep' + cR] .msg = customChat.encode_b64 (rep_msg);
+						$ ('# modal_js'). css ('affichage', 'aucun');
+						$ rep.text (rep_title);
+						$ rep.data ('msg', customChat.encode_b64 (rep_msg));
+						customChat.save ();
+						is_add = faux;
+					}
+					autre {
+						alert ('Votre message n \' est pas assez long! ');
+					}
+				}
+				autre {
+					alert ('Votre titre n \' est pas assez long! ');
+				}
+			}
+		});
+		$ ('# modal_js_cancel'). on ('click', function () {
+			if (is_add) {
+				$ ('# modal_js'). css ('affichage', 'aucun');
+				is_add = faux;
+			}
+		});
+	},
+	del_rP: fonction () {
+		this.modal ('Entrer le chiffre de la réponse à supprimer', '<input id = "modal_js_rep_num" class = "textCtrl" style = "width: 100%; height: 20px;" placeholder = "Chiffre de la réponse à supprimer "/> <br/> ');
+		var is_del = vrai;
+		$ ('# modal_js_save'). on ('click', function () {
+			if (is_del) {
+				var rep_num = $ ('# modal_js_rep_num'). val (). trim ();
+				if (rep_num> 0 && rep_num <6) {
+					$ ('# customChat_rP [data-num = "' + rep_num + '"]'). text ("Message" + rep_num);
+					$ ('# customChat_rP [data-num = "' + rep_num + '"]'). data ('msg', "");
+					rP ['rep' + rep_num] .title = "";
+					rP ['rep' + rep_num] .msg = "";
+					$ ('# modal_js'). css ('affichage', 'aucun');
+					customChat.save ();
+					is_del = faux;
+				}
+			}
+		});
+		$ ('# modal_js_cancel'). on ('click', function () {
+			if (is_del) {
+				$ ('# modal_js'). css ('affichage', 'aucun');
+				is_del = faux;
+			}
+		});
+	}
+};
+
+customChat.init ();
